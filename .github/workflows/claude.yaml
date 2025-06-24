@@ -9,8 +9,8 @@ jobs:
       github.event.issue.user.login == 'watany-dev'
       && contains(github.event.comment.body, '@claude') 
     runs-on: ubuntu-latest
-    # env:
-    #   ANTHROPIC_BEDROCK_BASE_URL: "https://bedrock-runtime.us-west-2.amazonaws.com"
+    env:
+      ANTHROPIC_BEDROCK_BASE_URL: "https://bedrock-runtime.us-west-2.amazonaws.com"
     permissions:
       id-token: write
       contents: read
