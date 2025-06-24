@@ -139,7 +139,7 @@ dist
 bun.lockb
 
 # Build outputs
-bin/ccsay-standalone
+bin/
 
 # IDE
 .vscode/

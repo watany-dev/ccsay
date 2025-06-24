@@ -44,25 +44,53 @@ export const BLOCK_FONT: Record<string, string[]> = {
 };
 
 export function textToAsciiArt(text: string): string {
+  if (!text) return "\n\n\n\n\n";
+
   const textLines = text.split("\n");
-  const allAsciiLines: string[] = [];
+  const spaceChar = BLOCK_FONT[" "];
+  const allAsciiLines: string[][] = [];
 
-  for (const textLine of textLines) {
-    const lines: string[] = ["", "", "", "", "", ""];
-    const upperText = textLine.toUpperCase();
-
-    for (const char of upperText) {
-      const charArt = BLOCK_FONT[char] || BLOCK_FONT[" "];
+  for (let lineIndex = 0; lineIndex < textLines.length; lineIndex++) {
+    const textLine = textLines[lineIndex];
+    if (!textLine) {
+      // Add empty lines for empty text lines
       for (let i = 0; i < 6; i++) {
-        lines[i] += charArt[i];
+        allAsciiLines.push([]);
+      }
+    } else {
+      const upperText = textLine.toUpperCase();
+      const lines: string[][] = [[], [], [], [], [], []];
+
+      // Pre-calculate character arts to avoid repeated lookups
+      const charArts: string[][] = [];
+      for (let charIndex = 0; charIndex < upperText.length; charIndex++) {
+        const char = upperText[charIndex];
+        const charArt = char ? BLOCK_FONT[char] : undefined;
+        charArts[charIndex] = charArt || spaceChar;
+      }
+
+      // Build all 6 lines simultaneously
+      for (let i = 0; i < 6; i++) {
+        const line = lines[i];
+        if (line) {
+          for (let charIndex = 0; charIndex < charArts.length; charIndex++) {
+            const charArt = charArts[charIndex];
+            const artLine = charArt?.[i];
+            if (artLine) {
+              line.push(artLine);
+            }
+          }
+          allAsciiLines.push(line);
+        }
       }
     }
 
-    allAsciiLines.push(...lines);
-    if (textLine !== textLines[textLines.length - 1]) {
-      allAsciiLines.push("");
+    // Add separator between text lines (except last)
+    if (lineIndex < textLines.length - 1) {
+      allAsciiLines.push([]);
     }
   }
 
-  return allAsciiLines.join("\n");
+  // Join all at once for better performance
+  return allAsciiLines.map((line) => line.join("")).join("\n");
 }
