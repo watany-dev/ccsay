@@ -18,6 +18,9 @@
       },
       "style": {
         "noDefaultExport": "off"
+      },
+      "suspicious": {
+        "noControlCharactersInRegex": "off"
       }
     }
   },
