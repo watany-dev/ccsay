@@ -66,13 +66,13 @@ describe("fonts", () => {
       const lines = result.split("\n");
       // Each text line produces 6 ASCII art lines, plus 1 empty line between them
       expect(lines).toHaveLength(13); // 6 + 1 + 6
-      
+
       // Check that the first line starts with H
       expect(lines[0]).toContain("██╗  ██╗");
-      
+
       // Check that there's an empty line between HELLO and WORLD
       expect(lines[6]).toBe("");
-      
+
       // Check that WORLD starts on line 7
       expect(lines[7]).toContain("██╗    ██╗");
     });
@@ -89,15 +89,15 @@ describe("fonts", () => {
       const lines = result.split("\n");
       // Empty line (6 lines) + separator + TEST (6 lines)
       expect(lines).toHaveLength(13);
-      
+
       // First 6 lines should be empty
       for (let i = 0; i < 6; i++) {
         expect(lines[i]).toBe("");
       }
-      
+
       // Line 6 should be the separator
       expect(lines[6]).toBe("");
-      
+
       // TEST should start at line 7
       expect(lines[7]).toContain("████████╗");
     });
@@ -107,7 +107,7 @@ describe("fonts", () => {
       const lines = result.split("\n");
       // TEST (6 lines) + separator + empty line (6 lines)
       expect(lines).toHaveLength(13);
-      
+
       // Last 6 lines should be empty
       for (let i = 7; i < 13; i++) {
         expect(lines[i]).toBe("");
@@ -118,7 +118,7 @@ describe("fonts", () => {
       const result = textToAsciiArt("Hello\nWorld");
       const lines = result.split("\n");
       expect(lines).toHaveLength(13);
-      
+
       // Should convert to uppercase
       const upperResult = textToAsciiArt("HELLO\nWORLD");
       expect(result).toBe(upperResult);

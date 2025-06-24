@@ -15,7 +15,9 @@
       "Bash(bun build:*)",
       "Bash(./bin/ccsay-standalone:*)",
       "Bash(bin/ccsay:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "WebFetch(domain:assets.st-note.com)",
+      "Bash(echo:*)"
     ],
     "deny": []
   }

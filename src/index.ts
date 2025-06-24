@@ -9,11 +9,11 @@ if (args.length > 0) {
   for (let i = 0; i < args.length; i++) {
     if (i > 0) {
       // Check if current arg starts with 'n' and previous arg ended with '\'
-      if (args[i]?.startsWith('n') && args[i-1]?.endsWith('\\')) {
+      if (args[i]?.startsWith("n") && args[i - 1]?.endsWith("\\")) {
         // Remove the trailing \ from previous part and add \n
-        rawText = rawText.slice(0, -1) + '\\n' + args[i]?.slice(1);
+        rawText = `${rawText.slice(0, -1)}\\n${args[i]?.slice(1)}`;
       } else {
-        rawText += " " + args[i];
+        rawText += ` ${args[i]}`;
       }
     } else {
       rawText += args[i];
