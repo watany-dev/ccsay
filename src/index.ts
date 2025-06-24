@@ -30,7 +30,7 @@ export function main() {
   // Parse arguments for color option
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
-    if (arg === '-c' || arg === '--color') {
+    if (arg === "-c" || arg === "--color") {
       // Get next argument as color value
       if (i + 1 < args.length) {
         color = parseColor(args[i + 1]);
@@ -48,11 +48,11 @@ export function main() {
     if (!process.stdin.isTTY) {
       // Read from stdin
       let stdinData = "";
-      process.stdin.setEncoding('utf8');
-      process.stdin.on('data', (chunk) => {
+      process.stdin.setEncoding("utf8");
+      process.stdin.on("data", (chunk) => {
         stdinData += chunk;
       });
-      process.stdin.on('end', () => {
+      process.stdin.on("end", () => {
         const text = stdinData.trim();
         const asciiArt = textToAsciiArt(text);
         console.log(`${color}${asciiArt}\x1b[0m`);
