@@ -1,0 +1,37 @@
+name: Claude Assistant
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  claude-code-action:
+    if:  
+      github.event.issue.user.login == 'watany-dev'
+      && contains(github.event.comment.body, '@claude') 
+    runs-on: ubuntu-latest
+    # env:
+    #   ANTHROPIC_BEDROCK_BASE_URL: "https://bedrock-runtime.us-west-2.amazonaws.com"
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: read
+      checks: read
+      issues: read
+      security-events: read
+      statuses: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      # For AWS Bedrock with OIDC
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: us-west-2
+      
+      - uses: anthropics/claude-code-action@beta
+        with:
+          model: "us.anthropic.claude-sonnet-4-20250514-v1:0"
+          use_bedrock: "true"
