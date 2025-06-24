@@ -13,7 +13,9 @@
       "Bash(bunx biome check:*)",
       "Bash(bun test:*)",
       "Bash(bun build:*)",
-      "Bash(./bin/ccsay-standalone:*)"
+      "Bash(./bin/ccsay-standalone:*)",
+      "Bash(bin/ccsay:*)",
+      "Bash(cat:*)"
     ],
     "deny": []
   }
