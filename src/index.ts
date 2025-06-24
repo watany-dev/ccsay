@@ -22,8 +22,43 @@ function parseColor(colorInput: string): string {
   return COLOR_MAP[color] || COLOR_MAP.orange || "\x1b[38;5;208m"; // Default to orange if color not found
 }
 
+function showHelp(): void {
+  const helpText = `ccsay - Display text in colorful ASCII art
+
+Usage:
+  ccsay [options] [text]
+  echo "text" | ccsay [options]
+
+Options:
+  --help, -h       Show this help message
+  --color, -c      Set text color (default: orange)
+                   Available colors: black, red, green, yellow, blue, magenta,
+                   cyan, white, orange, purple, pink, gray, grey
+
+Examples:
+  ccsay "Hello World"                    Display "Hello World" in ASCII art
+  ccsay -c red "ERROR"                   Display "ERROR" in red
+  ccsay "Line 1\\nLine 2"                 Multi-line text with newlines
+  echo "Piped text" | ccsay              Read from stdin
+  ccsay --color blue "BUILDING..."       Display in blue color
+
+Version:
+  0.0.2
+
+For more information, visit: https://github.com/watany-dev/ccsay`;
+
+  console.log(helpText);
+}
+
 export function main() {
   const args = process.argv.slice(2);
+
+  // Check for help flags first
+  if (args.includes("--help") || args.includes("-h")) {
+    showHelp();
+    return;
+  }
+
   let color = COLOR_MAP.orange; // Default color
   const textArgs: string[] = [];
 
