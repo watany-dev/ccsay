@@ -66,7 +66,7 @@ export function textToAsciiArt(text: string): string {
       for (let charIndex = 0; charIndex < upperText.length; charIndex++) {
         const char = upperText[charIndex];
         const charArt = char ? BLOCK_FONT[char] : undefined;
-        charArts[charIndex] = charArt || spaceChar;
+        charArts[charIndex] = charArt || spaceChar || [];
       }
 
       // Build all 6 lines simultaneously

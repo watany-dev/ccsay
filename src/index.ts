@@ -19,7 +19,7 @@ const COLOR_MAP: Record<string, string> = {
 
 function parseColor(colorInput: string): string {
   const color = colorInput.toLowerCase();
-  return COLOR_MAP[color] || COLOR_MAP.orange; // Default to orange if color not found
+  return COLOR_MAP[color] || COLOR_MAP.orange || "\x1b[38;5;208m"; // Default to orange if color not found
 }
 
 export function main() {
@@ -33,11 +33,11 @@ export function main() {
     if (arg === "-c" || arg === "--color") {
       // Get next argument as color value
       if (i + 1 < args.length) {
-        color = parseColor(args[i + 1]);
+        color = parseColor(args[i + 1] || "");
         i++; // Skip the color value in next iteration
       }
     } else {
-      textArgs.push(arg);
+      textArgs.push(arg || "");
     }
   }
 

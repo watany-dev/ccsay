@@ -47,9 +47,6 @@ ccsay/
 │   └── fonts.ts      # ASCII art font definitions
 ├── test/
 │   └── fonts.test.ts # Unit tests
-├── bin/
-│   ├── ccsay         # Bun-based executable
-│   └── ccsay-standalone # Compiled binary
 ├── biome.json        # Formatter/linter config
 ├── vitest.config.ts  # Test runner config
 └── package.json      # Project configuration
