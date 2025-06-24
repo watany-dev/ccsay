@@ -1,10 +1,10 @@
 {
   "name": "ccsay",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A joke CLI tool that displays text in ASCII art like cowsay",
   "module": "src/index.ts",
   "bin": {
-    "ccsay": "./bin/ccsay"
+    "ccsay": "./src/index.ts"
   },
   "type": "module",
   "scripts": {
@@ -33,6 +33,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@anthropic-ai/claude-code": "^1.0.33"
+    "@anthropic-ai/claude-code": "^1.0.33",
+    "ccsay": "^1.0.1"
   }
 }
