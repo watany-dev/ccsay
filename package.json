@@ -10,11 +10,11 @@
   "scripts": {
     "dev": "bun run src/index.ts",
     "build": "bun build src/index.ts --compile --outfile bin/ccsay",
-    "lint": "biome check .",
-    "lint:fix": "biome check --write .",
-    "format": "biome format --write .",
-    "test": "vitest run",
-    "test:watch": "vitest --watch"
+    "lint": "bunx @biomejs/biome check .",
+    "lint:fix": "bunx @biomejs/biome check --write .",
+    "format": "bunx @biomejs/biome format --write .",
+    "test": "bunx vitest run",
+    "test:watch": "bunx vitest --watch"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.5",
@@ -31,8 +31,5 @@
     "joke"
   ],
   "author": "",
-  "license": "Apache-2.0",
-  "dependencies": {
-    "@anthropic-ai/claude-code": "^1.0.33"
-  }
+  "license": "Apache-2.0"
 }
