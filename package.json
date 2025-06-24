@@ -17,14 +17,22 @@
     "test:watch": "vitest --watch"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.0.5",
     "@types/bun": "latest",
-    "vitest": "^2.1.8"
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
-  "keywords": ["cli", "ascii-art", "cowsay", "joke"],
+  "keywords": [
+    "cli",
+    "ascii-art",
+    "cowsay",
+    "joke"
+  ],
   "author": "",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@anthropic-ai/claude-code": "^1.0.33"
+  }
 }

@@ -20,7 +20,10 @@
       "Bash(echo:*)",
       "Bash(time bun run:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(git rm:*)"
+      "Bash(npm outdated)",
+      "Bash(npm view:*)",
+      "Bash(npx:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }
