@@ -7,6 +7,21 @@ export function main() {
   // Rejoin args, looking for separated \n sequences
   let rawText: string;
   if (args.length === 0) {
+    // Check if stdin has data (piped input)
+    if (!process.stdin.isTTY) {
+      // Read from stdin
+      let stdinData = "";
+      process.stdin.setEncoding('utf8');
+      process.stdin.on('data', (chunk) => {
+        stdinData += chunk;
+      });
+      process.stdin.on('end', () => {
+        const text = stdinData.trim();
+        const asciiArt = textToAsciiArt(text);
+        console.log(`\x1b[38;5;208m${asciiArt}\x1b[0m`);
+      });
+      return;
+    }
     rawText = "CLAUDE\nCODE";
   } else {
     const parts: string[] = [];
