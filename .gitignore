@@ -134,3 +134,30 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Bun
+bun.lockb
+
+# Build outputs
+bin/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Biome
+.biome/
+
+# Test coverage
+coverage/
+*.coverage
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/

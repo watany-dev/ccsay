@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+        
+    - name: Install dependencies
+      run: bun install
+      
+    - name: Run tests
+      run: bun test
+      
+    - name: Build standalone binary
+      run: bun run build
+      
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          bin/ccsay
+        body: |
+          ## What's Changed
+          
+          Release of ccsay v${{ github.ref_name }}
+          
+          ### Installation
+          
+          Download the `ccsay` binary and make it executable:
+          
+          ```bash
+          chmod +x ccsay
+          ./ccsay "YOUR TEXT"
+          ```
+          
+          Or move it to your PATH:
+          
+          ```bash
+          sudo mv ccsay /usr/local/bin/ccsay
+          ccsay "YOUR TEXT"
+          ```
+        draft: false
+        prerelease: false
