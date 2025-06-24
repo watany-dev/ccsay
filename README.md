@@ -77,6 +77,24 @@ ccsay "Hello World"
 
 # Multiple words
 ccsay "This is awesome"
+
+# Show help
+ccsay --help
+ccsay -h
+```
+
+### Color Options
+
+```bash
+# Default orange color
+ccsay "Hello World"
+
+# Red text
+ccsay -c red "ERROR"
+ccsay --color red "ERROR"
+
+# Available colors: black, red, green, yellow, blue, magenta, cyan, white, orange, purple, pink, gray, grey
+ccsay -c blue "BUILDING..."
 ```
 
 ### Multi-line Text

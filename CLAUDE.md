@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-ccsay is a joke CLI tool that displays text in ASCII art similar to cowsay. It renders text using block-style Unicode characters in orange color (ANSI escape code). By default, it displays "CLAUDE CODE" but accepts custom text as command-line arguments.
+ccsay is a joke CLI tool that displays text in ASCII art similar to cowsay. It renders text using block-style Unicode characters in orange color (ANSI escape code). By default, it displays "CLAUDE CODE" but accepts custom text as command-line arguments. It supports color customization and help options.
 
 ## Development Setup
 
@@ -24,6 +24,7 @@ bun install
 # Run in development
 bun run dev
 bun run src/index.ts "YOUR TEXT"
+bun run src/index.ts --help  # Show help
 
 # Run tests
 bun test
@@ -46,7 +47,8 @@ ccsay/
 │   ├── index.ts      # CLI entry point
 │   └── fonts.ts      # ASCII art font definitions
 ├── test/
-│   └── fonts.test.ts # Unit tests
+│   ├── fonts.test.ts # Font tests
+│   └── index.test.ts # CLI tests
 ├── biome.json        # Formatter/linter config
 ├── vitest.config.ts  # Test runner config
 └── package.json      # Project configuration
@@ -64,11 +66,13 @@ ccsay/
 
 The project consists of two main modules:
 1. `fonts.ts`: Contains the BLOCK_FONT dictionary mapping characters to 6-line ASCII art arrays
-2. `index.ts`: CLI interface that processes arguments and outputs colored ASCII art
+2. `index.ts`: CLI interface that processes arguments, handles help flags, and outputs colored ASCII art
 
 ## Testing
 
 Tests are written using Vitest and cover:
 - Font character availability (A-Z, 0-9, punctuation)
 - Text-to-ASCII conversion logic
+- CLI argument parsing (color flags, help flags)
+- Help functionality and output formatting
 - Edge cases (empty strings, unknown characters)

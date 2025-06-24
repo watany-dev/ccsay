@@ -160,4 +160,68 @@ describe("index", () => {
       expect(output).toContain("████████╗███████╗███████╗████████╗"); // TEST in ASCII art
     });
   });
+
+  describe("help functionality", () => {
+    it("should display help when --help flag is used", () => {
+      process.argv = ["node", "index.ts", "--help"];
+      main();
+      const output = consoleLogSpy.mock.calls[0]?.[0];
+      expect(output).toContain("Usage:");
+      expect(output).toContain("ccsay");
+      expect(output).toContain("Options:");
+      expect(output).toContain("--help, -h");
+      expect(output).toContain("--color, -c");
+      // Should not contain ASCII art
+      expect(output).not.toContain("██");
+    });
+
+    it("should display help when -h flag is used", () => {
+      process.argv = ["node", "index.ts", "-h"];
+      main();
+      const output = consoleLogSpy.mock.calls[0]?.[0];
+      expect(output).toContain("Usage:");
+      expect(output).toContain("ccsay");
+      expect(output).toContain("Options:");
+      expect(output).toContain("--help, -h");
+      expect(output).toContain("--color, -c");
+      // Should not contain ASCII art
+      expect(output).not.toContain("██");
+    });
+
+    it("should display help when --help is mixed with other arguments", () => {
+      process.argv = ["node", "index.ts", "SOME_TEXT", "--help", "-c", "red"];
+      main();
+      const output = consoleLogSpy.mock.calls[0]?.[0];
+      expect(output).toContain("Usage:");
+      expect(output).toContain("ccsay");
+      // Should not contain ASCII art even with other args
+      expect(output).not.toContain("██");
+    });
+
+    it("should display help when -h is mixed with other arguments", () => {
+      process.argv = ["node", "index.ts", "-c", "blue", "-h", "TEXT"];
+      main();
+      const output = consoleLogSpy.mock.calls[0]?.[0];
+      expect(output).toContain("Usage:");
+      expect(output).toContain("ccsay");
+      // Should not contain ASCII art even with other args
+      expect(output).not.toContain("██");
+    });
+
+    it("should contain examples in help output", () => {
+      process.argv = ["node", "index.ts", "--help"];
+      main();
+      const output = consoleLogSpy.mock.calls[0]?.[0];
+      expect(output).toContain("Examples:");
+      expect(output).toContain('ccsay "Hello World"');
+    });
+
+    it("should contain version information in help output", () => {
+      process.argv = ["node", "index.ts", "--help"];
+      main();
+      const output = consoleLogSpy.mock.calls[0]?.[0];
+      expect(output).toContain("Version:");
+      expect(output).toContain("0.0.2");
+    });
+  });
 });
