@@ -1,0 +1,30 @@
+{
+  "name": "ccsay",
+  "version": "1.0.0",
+  "description": "A joke CLI tool that displays text in ASCII art like cowsay",
+  "module": "src/index.ts",
+  "bin": {
+    "ccsay": "./bin/ccsay"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "build": "bun build src/index.ts --compile --outfile bin/ccsay",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "test": "vitest run",
+    "test:watch": "vitest --watch"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "latest",
+    "vitest": "^2.1.8"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "keywords": ["cli", "ascii-art", "cowsay", "joke"],
+  "author": "",
+  "license": "Apache-2.0"
+}

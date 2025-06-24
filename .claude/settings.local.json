@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(bun init:*)",
+      "Bash(mkdir:*)",
+      "Bash(rm:*)",
+      "Bash(chmod:*)",
+      "Bash(export PATH=\"$HOME/.bun/bin:$PATH\")",
+      "Bash(bun run:*)",
+      "Bash(bun install:*)",
+      "Bash(biome check:*)",
+      "Bash(bunx biome check:*)",
+      "Bash(bun test:*)",
+      "Bash(bun build:*)",
+      "Bash(./bin/ccsay-standalone:*)"
+    ],
+    "deny": []
+  }
+}

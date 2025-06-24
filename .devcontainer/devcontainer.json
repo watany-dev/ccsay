@@ -1,0 +1,19 @@
+{
+  "name": "My Codespace",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1.6.2": {}
+  },
+  "postCreateCommand": {
+    "Install Extra Apt Packages": "sudo apt -y update",
+    "Install Extra Node Packages": "npm install --global @anthropic-ai/claude-code && npm install --global bun"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+         "saoudrizwan.claude-dev"
+      ]
+    }
+  },
+ "remoteUser": "codespace"
+}
