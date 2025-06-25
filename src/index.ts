@@ -1,25 +1,25 @@
 #!/usr/bin/env bun
 import { textToAsciiArt } from "./fonts";
 
+const c = (n: number) => `\x1b[${n}m`;
 const COLOR_MAP: Record<string, string> = {
-  black: "\x1b[30m",
-  red: "\x1b[31m",
-  green: "\x1b[32m",
-  yellow: "\x1b[33m",
-  blue: "\x1b[34m",
-  magenta: "\x1b[35m",
-  cyan: "\x1b[36m",
-  white: "\x1b[37m",
-  orange: "\x1b[38;5;208m", // Default orange color
+  black: c(30),
+  red: c(31),
+  green: c(32),
+  yellow: c(33),
+  blue: c(34),
+  magenta: c(35),
+  cyan: c(36),
+  white: c(37),
+  orange: "\x1b[38;5;208m",
   purple: "\x1b[38;5;129m",
   pink: "\x1b[38;5;205m",
-  gray: "\x1b[90m",
-  grey: "\x1b[90m",
+  gray: c(90),
+  grey: c(90),
 };
 
 function parseColor(colorInput: string): string {
-  const color = colorInput.toLowerCase();
-  return COLOR_MAP[color] || COLOR_MAP.orange || "\x1b[38;5;208m"; // Default to orange if color not found
+  return COLOR_MAP[colorInput.toLowerCase()] || COLOR_MAP.orange;
 }
 
 function showHelp(): void {
@@ -59,7 +59,7 @@ export function main() {
     return;
   }
 
-  let color = COLOR_MAP.orange; // Default color
+  let color = COLOR_MAP.orange;
   const textArgs: string[] = [];
 
   // Parse arguments for color option
