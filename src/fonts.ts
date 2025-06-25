@@ -59,14 +59,19 @@ export function textToAsciiArt(text: string): string {
       const charArts: string[][] = [];
       for (let charIndex = 0; charIndex < upperText.length; charIndex++) {
         const char = upperText[charIndex];
-        charArts[charIndex] = BLOCK_FONT[char] || spaceChar;
+        const charArt = BLOCK_FONT[char || " "];
+        charArts[charIndex] = charArt || spaceChar || ["", "", "", "", "", ""];
       }
       for (let i = 0; i < 6; i++) {
         for (let charIndex = 0; charIndex < charArts.length; charIndex++) {
-          const artLine = charArts[charIndex][i];
-          if (artLine) lines[i].push(artLine);
+          const charArt = charArts[charIndex];
+          if (charArt) {
+            const artLine = charArt[i];
+            if (artLine) lines[i]?.push(artLine);
+          }
         }
-        allAsciiLines.push(lines[i]);
+        const line = lines[i];
+        if (line) allAsciiLines.push(line);
       }
     }
     if (lineIndex < textLines.length - 1) allAsciiLines.push([]);

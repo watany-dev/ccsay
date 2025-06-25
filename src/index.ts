@@ -1,4 +1,4 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 import { textToAsciiArt } from "./fonts";
 
 const c = (n: number) => `\x1b[${n}m`;
@@ -19,7 +19,7 @@ const COLOR_MAP: Record<string, string> = {
 };
 
 function parseColor(colorInput: string): string {
-  return COLOR_MAP[colorInput.toLowerCase()] || COLOR_MAP.orange;
+  return COLOR_MAP[colorInput.toLowerCase()] || COLOR_MAP.orange || c(38);
 }
 
 function showHelp(): void {
@@ -128,6 +128,6 @@ export function main() {
 }
 
 // Run when this file is executed directly
-if (import.meta.main) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
