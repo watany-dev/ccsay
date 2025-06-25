@@ -36,7 +36,7 @@ bun run lint:fix      # Fix auto-fixable issues
 bun run format        # Format code
 
 # Build standalone binary
-bun run build         # Creates bin/ccsay-standalone
+bun run build         # Creates bin/ccsay
 ```
 
 ## Project Structure

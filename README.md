@@ -42,7 +42,7 @@ Requirements: [Bun](https://bun.sh) runtime
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/ccsay.git
+git clone https://github.com/watany-dev/ccsay.git
 cd ccsay
 
 # Install dependencies
@@ -103,8 +103,8 @@ ccsay -c blue "BUILDING..."
 # Using \n for newlines
 ccsay "Line 1\nLine 2"
 
-# Separate arguments with \n
-ccsay "First Line" \ n "Second Line"
+# Using explicit newline in text
+ccsay "First Line\nSecond Line"
 ```
 
 ### Examples
@@ -181,7 +181,7 @@ Want to contribute? Great!
 
 ```bash
 # Clone and setup
-git clone https://github.com/your-username/ccsay.git
+git clone https://github.com/watany-dev/ccsay.git
 cd ccsay
 bun install
 
