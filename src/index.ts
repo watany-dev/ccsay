@@ -23,29 +23,105 @@ function parseColor(colorInput: string): string {
 }
 
 function showHelp(): void {
-  const helpText = `ccsay - Display text in colorful ASCII art
+  const colorDemo = (colorKey: string, colorCode: string) => 
+    `${colorCode}${colorKey.padEnd(8)}${c(0)}`;
 
-Usage:
-  ccsay [options] [text]
-  echo "text" | ccsay [options]
+  const helpText = `ccsay - Display text in colorful ASCII block art
 
-Options:
-  --help, -h       Show this help message
-  --color, -c      Set text color (default: orange)
-                   Available colors: black, red, green, yellow, blue, magenta,
-                   cyan, white, orange, purple, pink, gray, grey
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                  USAGE                                       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 
-Examples:
-  ccsay "Hello World"                    Display "Hello World" in ASCII art
-  ccsay -c red "ERROR"                   Display "ERROR" in red
-  ccsay "Line 1\\nLine 2"                 Multi-line text with newlines
-  echo "Piped text" | ccsay              Read from stdin
-  ccsay --color blue "BUILDING..."       Display in blue color
+Basic Usage:
+  ccsay [text]                    Display text in ASCII art (default: "CLAUDE CODE")
+  ccsay [options] [text]          Display text with options
+  echo "text" | ccsay [options]   Read text from stdin/pipe
 
-Version:
-  0.0.2
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                 OPTIONS                                      ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 
-For more information, visit: https://github.com/watany-dev/ccsay`;
+  --help, -h              Show this comprehensive help message
+  --color, -c <color>     Set text color (default: orange)
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                              AVAILABLE COLORS                                ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+${colorDemo("black", COLOR_MAP.black)}  ${colorDemo("red", COLOR_MAP.red)}    ${colorDemo("green", COLOR_MAP.green)}  ${colorDemo("yellow", COLOR_MAP.yellow)}
+${colorDemo("blue", COLOR_MAP.blue)}   ${colorDemo("magenta", COLOR_MAP.magenta)}${colorDemo("cyan", COLOR_MAP.cyan)}   ${colorDemo("white", COLOR_MAP.white)}
+${colorDemo("orange", COLOR_MAP.orange)}  ${colorDemo("purple", COLOR_MAP.purple)} ${colorDemo("pink", COLOR_MAP.pink)}   ${colorDemo("gray", COLOR_MAP.gray)}
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                            SUPPORTED CHARACTERS                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Letters:     A-Z (automatically converted to uppercase)
+Numbers:     0-9
+Punctuation: ! ? . , -
+Special:     space (for spacing between words)
+Newlines:    \\n (use \\\\n in command line or actual newlines in pipes)
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                 EXAMPLES                                     ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Basic Examples:
+  ccsay                           Default text: "CLAUDE CODE"
+  ccsay "HELLO"                   Display "HELLO"
+  ccsay "Hello World"             Display "HELLO WORLD" (auto-uppercase)
+
+Color Examples:
+  ccsay -c red "ERROR"            Red text
+  ccsay --color blue "INFO"       Blue text
+  ccsay -c green "SUCCESS"        Green text
+
+Multi-line Examples:
+  ccsay "LINE 1\\nLINE 2"          Two lines of text
+  ccsay "TOP\\nMIDDLE\\nBOTTOM"     Three lines of text
+
+Pipe Examples:
+  echo "PIPED TEXT" | ccsay       Read from pipe
+  echo "DATA" | ccsay -c cyan     Colored pipe input
+  cat file.txt | ccsay           Display file content
+
+Real-world Examples:
+  ccsay -c red "BUILD FAILED"     Error messages
+  ccsay -c green "DEPLOYED"       Success messages  
+  ccsay -c yellow "WARNING"       Warning messages
+  ccsay -c blue "LOADING..."      Status messages
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                              TROUBLESHOOTING                                 ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Common Issues:
+  • Unsupported characters display as spaces
+  • Use quotes around text with spaces: ccsay "HELLO WORLD"
+  • For literal \\n in terminal: ccsay "LINE1\\\\nLINE2"
+  • Colors not showing? Check terminal color support
+  • Pipe input not working? Ensure data is being piped: echo "text" | ccsay
+
+Character Issues:
+  • Lowercase letters are converted to uppercase automatically
+  • Unsupported symbols (like @#$%^&*) appear as spaces
+  • International characters are not supported
+
+Performance:
+  • Large amounts of text may be slow to render
+  • Each character is ~6 lines tall, plan accordingly
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                  INFO                                        ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Version:    0.0.2
+Repository: https://github.com/watany-dev/ccsay
+Runtime:    Bun (fast JavaScript runtime)
+
+This tool creates ASCII art using Unicode block characters for a clean,
+modern appearance. Perfect for terminal banners, status messages, and adding
+visual flair to command-line applications.`;
 
   console.log(helpText);
 }
