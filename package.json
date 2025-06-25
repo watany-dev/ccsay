@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun run src/index.ts",
-    "build": "bun build src/index.ts --compile --outfile bin/ccsay",
+    "build": "npx tsc && cp bin/index.js bin/ccsay && chmod +x bin/ccsay",
     "lint": "bunx @biomejs/biome check .",
     "lint:fix": "bunx @biomejs/biome check --write .",
     "format": "bunx @biomejs/biome format --write .",
