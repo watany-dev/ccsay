@@ -27,6 +27,14 @@ describe("fonts", () => {
       }
     });
 
+    it("should contain basic hiragana characters", () => {
+      const hiragana = ["あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ"];
+      for (const char of hiragana) {
+        expect(BLOCK_FONT[char]).toBeDefined();
+        expect(BLOCK_FONT[char]).toHaveLength(6);
+      }
+    });
+
     // Property-based testing for font consistency
     it("should maintain consistent character width across all letters", () => {
       const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -279,6 +287,54 @@ describe("fonts", () => {
       for (const [input, expected] of mixedCaseTests) {
         expect(textToAsciiArt(input)).toBe(textToAsciiArt(expected));
       }
+    });
+
+    it("should handle hiragana characters without case conversion", () => {
+      const hiraganaText = "あいう";
+      const result = textToAsciiArt(hiraganaText);
+      const lines = result.split("\n");
+      expect(lines).toHaveLength(6);
+
+      // Hiragana should not be affected by case conversion
+      const expectedA = BLOCK_FONT["あ"];
+      const expectedI = BLOCK_FONT["い"];
+      const expectedU = BLOCK_FONT["う"];
+
+      for (let i = 0; i < 6; i++) {
+        const expectedLine = expectedA[i] + expectedI[i] + expectedU[i];
+        expect(lines[i]).toBe(expectedLine);
+      }
+    });
+
+    it("should handle mixed hiragana and English text", () => {
+      const mixedText = "ABCあいう";
+      const result = textToAsciiArt(mixedText);
+      const lines = result.split("\n");
+      expect(lines).toHaveLength(6);
+
+      // Should contain both English (converted to uppercase) and hiragana
+      const expectedA = BLOCK_FONT.A;
+      const expectedB = BLOCK_FONT.B;
+      const expectedC = BLOCK_FONT.C;
+      const expectedHiraganaA = BLOCK_FONT["あ"];
+      const expectedHiraganaI = BLOCK_FONT["い"];
+      const expectedHiraganaU = BLOCK_FONT["う"];
+
+      for (let i = 0; i < 6; i++) {
+        const expectedLine =
+          expectedA[i] +
+          expectedB[i] +
+          expectedC[i] +
+          expectedHiraganaA[i] +
+          expectedHiraganaI[i] +
+          expectedHiraganaU[i];
+        expect(lines[i]).toBe(expectedLine);
+      }
+    });
+
+    it("should maintain visual consistency for hiragana text", () => {
+      const result = textToAsciiArt("こんにちは");
+      expect(result).toMatchSnapshot();
     });
 
     // Additional comprehensive tests
